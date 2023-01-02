@@ -1,63 +1,33 @@
-//UC1
-
-const IS_ABSENT = 0
-let empCheck = Math.floor(Math.random() * 10) % 2;
-if (empCheck == IS_ABSENT) {
-    console.log("Employee is Absent ");
-    return;
-} else {
-    console.log("Employee is Present ");
-    
-}
-
-//UC2
-
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-let empHrs = 0;
-empCheck = Math.floor(Math.random() * 10) % 3;
-switch (empCheck) {
+const MAX_HRS_IN_MONTH = 160;
+const NO_OF_WORKING_DAYS = 20;
+
+//using function
+function getWorkingHrs(empCheck) {
+switch(empCheck) {
     case IS_PART_TIME:
-        empHrs = PART_TIME_HOURS;
-        break;
-        case IS_FULL_TIME:
-            empHrs = FULL_TIME_HOURS;
-            break;
-            default:
-                empHrs = 0;
+        return PART_TIME_HOURS;
+    case IS_FULL_TIME:
+        return FULL_TIME_HOURS;
+    default:
+        return 0;    
 }
-let empwage = empHrs * WAGE_PER_HOUR;
-console.log("Emp Wage: " + empwage);
-
-//UC3
-
-function getWorkingHours(empCheck) {
-    switch (empCheck) {
-        case IS_PART_TIME:
-            return PART_TIME_HOURS;
-            case IS_FULL_TIME:
-                return FULL_TIME_HOURS;
-                default:
-                    return 0;
-    }
 }
-empHrs = 0;
-empCheck = Math.floor(Math.random()   * 10) %3;
-empHrs = getWorkingHours(empCheck);
-empwage = empHrs * WAGE_PER_HOUR;
-console.log("Emp Wage: " + empwage);
 
-//UC4
+//initialize variables
+let totalEmpHrs = 0;
+let totalWorkingDays = 0;
 
-const NUM_OF_WORKING_DAYS = 2;
-empHrs = 0;
-for (let day =0;day<NUM_OF_WORKING_DAYS;day++) {
+while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NO_OF_WORKING_DAYS) {
+    totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
-    empHrs += getWorkingHours(empCheck);
+    totalEmpHrs += getWorkingHrs(empCheck);
 }
-let empWage = empHrs *WAGE_PER_HOUR;
-console.log("Total Hrs: " +empHrs+ " Emp Wage: " + empWage);
 
+let empWage = totalEmpHrs * WAGE_PER_HOUR;//calculating employee wage
+//print Total days,Total hrs and empWage   
+console.log("Total Days : " + totalWorkingDays + "Total Hrs : " + totalEmpHrs + "Emp Wage : " + empWage);
